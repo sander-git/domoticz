@@ -174,11 +174,11 @@ void SolarEdgeAPI::GetMeterDetails()
 	localtime_r(&atime_min5, &ltime_min5);
 
 	char szTmp[100];
-	sprintf(szTmp, "%04d-%02d-%02d %02d:%02d:%02d", ltime_min5.tm_year + 1900, ltime_min5.tm_mon + 1, ltime_min5.tm_mday, ltime_min5.tm_hour, ltime_min5.tm_min, ltime_min5.tm_sec);
-	std::string startDate= CURLEncode::URLEncode(szTmp);
+	sprintf(szTmp, "%04d-%02d-%02d%%20%02d:%02d:%02d", ltime_min5.tm_year + 1900, ltime_min5.tm_mon + 1, ltime_min5.tm_mday, ltime_min5.tm_hour, ltime_min5.tm_min, ltime_min5.tm_sec);
+	std::string startDate(szTmp);
 
-	sprintf(szTmp, "%04d-%02d-%02d %02d:%02d:%02d", ltime.tm_year + 1900, ltime.tm_mon + 1, ltime.tm_mday, ltime.tm_hour, ltime.tm_min, ltime.tm_sec);
-	std::string endDate = CURLEncode::URLEncode(szTmp);
+	sprintf(szTmp, "%04d-%02d-%02d%%20%02d:%02d:%02d", ltime.tm_year + 1900, ltime.tm_mon + 1, ltime.tm_mday, ltime.tm_hour, ltime.tm_min, ltime.tm_sec);
+	std::string endDate(szTmp);
 	std::stringstream sURL;
 	sURL << "https://monitoringapi.solaredge.com/equipment/" << m_SiteID << "/" << m_Serial << "/data.json?startTime=" << startDate << "&endTime=" << endDate << "&api_key=" << m_APIKey;
 	bool bret;
